@@ -1,3 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using DorevTelegramBot;
+string connectionString = "Data Source=./dorev.db;Mode=ReadOnly";
+SqliteDbRepository rep = new SqliteDbRepository(connectionString);
 
-Console.WriteLine("Hello, World!");
+try
+{
+    if (args.Length < 1) {
+        Console.WriteLine("Какое слово вы ищите?");
+        return;
+    }
+    Console.WriteLine(rep.Translate(args[0]));
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
