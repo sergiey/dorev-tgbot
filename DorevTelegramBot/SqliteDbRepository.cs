@@ -50,7 +50,6 @@ namespace DorevTelegramBot
                     else return "Ничего не найдено";
                 }
             }
-            // return "h";
             return result.ToString();
         }
     }
