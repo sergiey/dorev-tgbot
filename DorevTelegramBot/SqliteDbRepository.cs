@@ -4,7 +4,7 @@ using Microsoft.Data.Sqlite;
 
 namespace DorevTelegramBot
 {
-    class SqliteDbRepository : IRepository
+    public class SqliteDbRepository : IRepository
     {
         private readonly string _connectionString;
 
