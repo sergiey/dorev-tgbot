@@ -1,5 +1,5 @@
 ﻿using DorevTelegramBot;
-string connectionString = "Data Source=./dorev.db;Mode=ReadOnly";
+string connectionString = "Data Source=absolute/path/dorev.db";
 SqliteDbRepository rep = new SqliteDbRepository(connectionString);
 
 try
