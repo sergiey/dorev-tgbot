@@ -2,6 +2,6 @@
 {
     internal interface IRepository
     {
-        public string Translate(string origin);
+        public string Translate(string origin, string option);
     }
 }
