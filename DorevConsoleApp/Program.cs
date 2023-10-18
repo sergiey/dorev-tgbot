@@ -12,11 +12,8 @@ Options:
 
 try
 {
-    if (args.Length < 1) {
-        Console.WriteLine("Какое слово вы ищите?");
-        return;
-    }
-    Console.WriteLine(rep.Translate(args[0]));
+    var arguments = ArgumentsParser.GetArguments(args);
+    Console.WriteLine(rep.Translate(arguments.Word, arguments.Option));
 }
 catch (Exception e)
 {
