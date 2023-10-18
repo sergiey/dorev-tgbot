@@ -41,7 +41,6 @@ namespace DorevTelegramBot
                 connection.Open();
 
                 SqliteCommand command = new SqliteCommand(
-
                     sqlExpression, connection);
 
                 command.Parameters.AddWithValue("@word", word);
