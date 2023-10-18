@@ -4,7 +4,7 @@ namespace DorevTelegramBot;
 
 public class RegexpPreparer
 {
-    public static string NeutralizeIo(string origin)
+    private static StringBuilder NeutralizeIo(string origin)
     {
         var result = new StringBuilder();
         foreach(var c in origin) {
@@ -13,6 +13,21 @@ public class RegexpPreparer
             else
                 result.Append(c);
         }
-        return result.ToString();
+        return result;
+    }
+
+    public static string GetBeginStringMatchRegexp(string origin)
+    {
+        return NeutralizeIo(origin).Insert(0, "\\A").ToString();
+    }
+
+    public static string GetEndStringMatchRegexp(string origin)
+    {
+        return NeutralizeIo(origin).Append("\\z").ToString();
+    }
+
+    public static string GetAnywhereMatchRegexp(string origin)
+    {
+        return NeutralizeIo(origin).ToString();
     }
 }
