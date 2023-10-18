@@ -13,11 +13,18 @@ namespace DorevTelegramBot
             _connectionString = connectionString;
         }
 
-        public string Translate(string origin)
+        public string Translate(string origin, string option = "-b")
         {
             StringBuilder result = new StringBuilder();
             if (origin == null)
                 throw new ArgumentNullException();
+
+            string word = option switch {
+                "-b" => RegexpPreparer.GetBeginStringMatchRegexp(origin),
+                "-e" => RegexpPreparer.GetEndStringMatchRegexp(origin),
+                "-a" => RegexpPreparer.GetAnywhereMatchRegexp(origin),
+                   _ => RegexpPreparer.GetBeginStringMatchRegexp(origin)
+            };
 
             using (var connection = new SqliteConnection(_connectionString))
             {
@@ -32,11 +39,12 @@ namespace DorevTelegramBot
                     WHERE m REGEXP @word";
 
                 connection.Open();
+
                 SqliteCommand command = new SqliteCommand(
+
                     sqlExpression, connection);
-                    command.Parameters.AddWithValue(
-                        "@word",
-                        RegexpPreparer.NeutralizeIo(origin));
+
+                command.Parameters.AddWithValue("@word", word);
 
                 using (SqliteDataReader reader = command.ExecuteReader())
                 {
