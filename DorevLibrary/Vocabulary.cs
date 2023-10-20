@@ -43,30 +43,44 @@ public class Vocabulary
                 (string pattern, string input) =>
                     Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase));
 
-            string sqlExpression = @$"
-                    SELECT Modern m, Trad t
-                    FROM Dictionary
-                    WHERE m REGEXP @word";
-
             connection.Open();
 
             SqliteCommand command = new SqliteCommand(
                 sqlExpression, connection);
 
-            command.Parameters.AddWithValue("@word", word);
+            command.Parameters.AddWithValue("@word", preparedOrigin);
 
-            using (SqliteDataReader reader = command.ExecuteReader())
-            {
-                int count = 0;
-                if(reader.HasRows) {
-                    while(reader.Read() && count < 20) {
-                        result.Append($"{reader.GetString(1)}\n");
-                        count++;
-                    }
+            return ReadResults(command);
+        }
+    }
+
+    private string ReadResults(SqliteCommand command)
+    {
+        var result = new StringBuilder();
+        using (SqliteDataReader reader = command.ExecuteReader())
+        {
+            int count = 0;
+            if(reader.HasRows) {
+                while(reader.Read() && count < 20) {
+                    result.Append($"{reader.GetString(1)}\n");
+                    count++;
                 }
-                else return "Nothing found";
             }
+            else return "Nothing found";
         }
         return result.ToString();
+    }
+
+    private string GetRegexpPreparedString(string origin, Options option)
+    {
+        return option switch {
+            Options.MatchBegin =>
+                RegexpPreparer.GetBeginStringMatchRegexp(origin),
+            Options.MatchEnd =>
+                RegexpPreparer.GetEndStringMatchRegexp(origin),
+            Options.MatchAnywhere =>
+                RegexpPreparer.GetAnywhereMatchRegexp(origin),
+            _ => RegexpPreparer.GetBeginStringMatchRegexp(origin)
+        };
     }
 }
