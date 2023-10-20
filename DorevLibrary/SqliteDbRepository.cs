@@ -20,16 +20,19 @@ public class SqliteDbRepository
         _connectionString = connectionString;
     }
 
-    public string Translate(string origin, string option = "-b")
+    public string Translate(string origin, Options option = Options.MatchBegin)
     {
         StringBuilder result = new StringBuilder();
         if (origin == null)
             throw new ArgumentNullException();
 
         string word = option switch {
-            "-b" => RegexpPreparer.GetBeginStringMatchRegexp(origin),
-            "-e" => RegexpPreparer.GetEndStringMatchRegexp(origin),
-            "-a" => RegexpPreparer.GetAnywhereMatchRegexp(origin),
+            Options.MatchBegin => 
+                RegexpPreparer.GetBeginStringMatchRegexp(origin),
+            Options.MatchEnd => 
+                RegexpPreparer.GetEndStringMatchRegexp(origin),
+            Options.MatchAnywhere => 
+                RegexpPreparer.GetAnywhereMatchRegexp(origin),
             _ => RegexpPreparer.GetBeginStringMatchRegexp(origin)
         };
 
