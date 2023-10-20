@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using DorevLibrary;
 
 namespace DorevConsoleApp;
 
@@ -17,7 +18,16 @@ public static class ArgumentsParser
 
         if(args.Length >= 2)
             if (args[0] == "-a" || args[0] == "-b" || args[0] == "-e")
-                return new Arguments(args[1], args[0]);
+            {
+                var option = args[0] switch
+                {
+                    "-a" => Options.MatchAnywhere,
+                    "-b" => Options.MatchBegin,
+                    "-e" => Options.MatchEnd,
+                    _ => Options.MatchBegin
+                };
+                return new Arguments(args[1], option);
+            }
             else if(args[0][0] == '-')
                 throw new ArgumentException($"Illegal option: {args[0]}");
             else
