@@ -5,6 +5,13 @@ using Microsoft.Data.Sqlite;
 namespace DorevLibrary;
 
 public class SqliteDbRepository : IRepository
+public enum Options
+{
+    MatchBegin,
+    MatchEnd,
+    MatchAnywhere
+}
+
 {
     private readonly string _connectionString;
 
