@@ -1,7 +1,10 @@
 ﻿using DorevTelegramBot;
+using Microsoft.Extensions.Configuration;
 
 string connectionString = "Data Source=./dorev.db;Mode=ReadOnly";
-string token = "token";
+IConfiguration config =
+    new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+string token = config["Token"]!;
 
 using CancellationTokenSource cts = new();
 Bot bot = new Bot(connectionString, token, cts.Token);
