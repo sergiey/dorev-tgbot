@@ -13,7 +13,8 @@ public class Bot
     private readonly SqliteDbRepository _rep;
     private readonly CancellationToken _cancelToken;
 
-    public Bot(string connectionString, string token, CancellationToken cancelToken)
+    public Bot(string connectionString, string token,
+        CancellationToken cancelToken)
     {
         Token = token;
         _cancelToken = cancelToken;
@@ -59,7 +60,7 @@ public class Bot
         Console.WriteLine(
             $"Received a '{messageText}' message in chat {chatId}.");
 
-        Message sentMessage = await botClient.SendTextMessageAsync(
+        await botClient.SendTextMessageAsync(
             chatId: chatId,
             text: _rep.Translate(messageText),
             cancellationToken: cancellationToken);
