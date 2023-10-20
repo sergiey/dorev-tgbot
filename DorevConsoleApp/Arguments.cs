@@ -2,8 +2,8 @@ namespace DorevConsoleApp;
 
 public class Arguments
 {
-    public string Option { get; set; }
-    public string Word { get; set; }
+    public string? Option { get; set; }
+    public string? Word { get; set; }
 
     public Arguments()
     {
