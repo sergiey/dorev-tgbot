@@ -17,7 +17,7 @@ var vocab = new Vocabulary(connectionString);
 try
 {
     var arguments = ArgumentsParser.GetArguments(args);
-    Console.WriteLine(rep.Translate(arguments.Word!, arguments.Option));
+    Console.WriteLine(vocab.Translate(arguments.Word!, arguments.Option));
 }
 catch (Exception e)
 {
