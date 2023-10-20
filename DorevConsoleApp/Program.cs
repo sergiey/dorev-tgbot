@@ -1,6 +1,6 @@
-﻿using DorevTelegramBot;
-string connectionString = "Data Source=absolute/path/dorev.db";
-SqliteDbRepository rep = new SqliteDbRepository(connectionString);
+﻿using DorevConsoleApp;
+using DorevLibrary;
+
 const string usageText = """
 Usage: dorev [option] [word]
 
@@ -9,6 +9,10 @@ Options:
     -e    search in the end of a word
     -a    search anywhere in a word
 """;
+
+const string connectionString = 
+    "Data Source=/Users/sergeymelnikov/dorev/dorev.db";
+var rep = new SqliteDbRepository(connectionString);
 
 try
 {
