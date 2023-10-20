@@ -10,7 +10,7 @@ namespace DorevTelegramBot;
 public class Bot
 {
     public string Token;
-    private readonly SqliteDbRepository _rep;
+    private readonly Vocabulary _vocab;
     private readonly CancellationToken _cancelToken;
 
     public Bot(string connectionString, string token,
@@ -18,7 +18,7 @@ public class Bot
     {
         Token = token;
         _cancelToken = cancelToken;
-        _rep = new SqliteDbRepository(connectionString);
+        _vocab = new Vocabulary(connectionString);
     }
 
     public async Task Run()
@@ -62,7 +62,7 @@ public class Bot
 
         await botClient.SendTextMessageAsync(
             chatId: chatId,
-            text: _rep.Translate(messageText),
+            text: _vocab.Translate(messageText),
             cancellationToken: cancellationToken);
     }
 
