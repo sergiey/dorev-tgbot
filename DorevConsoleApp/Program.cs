@@ -12,7 +12,7 @@ Options:
 
 const string connectionString = 
     "Data Source=/Users/sergeymelnikov/dorev/dorev.db";
-var rep = new SqliteDbRepository(connectionString);
+var vocab = new Vocabulary(connectionString);
 
 try
 {
