@@ -30,8 +30,8 @@ namespace DorevTelegramBot
             {
                 connection.CreateFunction(
                     "regexp",
-                    (string pattern, string input)
-                        => Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase));
+                    (string pattern, string input) =>
+                        Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase));
 
                 string sqlExpression = @$"
                     SELECT Modern m, Trad t
