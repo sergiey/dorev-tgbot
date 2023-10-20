@@ -22,19 +22,15 @@ public class Vocabulary
 
     public string Translate(string origin, Options option = Options.MatchBegin)
     {
-        StringBuilder result = new StringBuilder();
+        const string sqlExpression = @"
+            SELECT Modern m, Trad t
+            FROM Dictionary
+            WHERE m REGEXP @word";
+        
         if (origin == null)
             throw new ArgumentNullException();
 
-        string word = option switch {
-            Options.MatchBegin => 
-                RegexpPreparer.GetBeginStringMatchRegexp(origin),
-            Options.MatchEnd => 
-                RegexpPreparer.GetEndStringMatchRegexp(origin),
-            Options.MatchAnywhere => 
-                RegexpPreparer.GetAnywhereMatchRegexp(origin),
-            _ => RegexpPreparer.GetBeginStringMatchRegexp(origin)
-        };
+        var preparedOrigin = GetRegexpPreparedString(origin, option);
 
         using (var connection = new SqliteConnection(_connectionString))
         {
