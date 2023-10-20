@@ -11,7 +11,7 @@ public static class ArgumentsParser
 
         if(args.Length == 1)
             if (args[0] == "-a" || args[0] == "-b" || args[0] == "-e")
-                throw new ArgumentException( "Option requires an argument.");
+                throw new ArgumentException("Option requires an argument.");
             else
                 return new Arguments(args[0]);
 
