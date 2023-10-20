@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevTelegramBot", "DorevTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevConsoleApp", "DorevConsoleApp\DorevConsoleApp.csproj", "{EFD0DFC9-F337-4EE3-9927-8F1D05E64804}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevLibrary", "DorevLibrary\DorevLibrary.csproj", "{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{EFD0DFC9-F337-4EE3-9927-8F1D05E64804}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFD0DFC9-F337-4EE3-9927-8F1D05E64804}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFD0DFC9-F337-4EE3-9927-8F1D05E64804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
