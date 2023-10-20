@@ -11,11 +11,11 @@ public enum Options
     MatchAnywhere
 }
 
-public class SqliteDbRepository
+public class Vocabulary
 {
     private readonly string _connectionString;
 
-    public SqliteDbRepository(string connectionString)
+    public Vocabulary(string connectionString)
     {
         _connectionString = connectionString;
     }
