@@ -4,7 +4,6 @@ using Microsoft.Data.Sqlite;
 
 namespace DorevLibrary;
 
-public class SqliteDbRepository : IRepository
 public enum Options
 {
     MatchBegin,
@@ -12,6 +11,7 @@ public enum Options
     MatchAnywhere
 }
 
+public class SqliteDbRepository
 {
     private readonly string _connectionString;
 
