@@ -1,7 +1,6 @@
-﻿namespace DorevTelegramBot
+﻿namespace DorevLibrary;
+
+internal interface IRepository
 {
-    internal interface IRepository
-    {
-        public string Translate(string origin, string option);
-    }
+    public string Translate(string origin, string option);
 }

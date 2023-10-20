@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace DorevTelegramBot;
+namespace DorevLibrary;
 
 public class RegexpPreparer
 {
