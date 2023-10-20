@@ -15,8 +15,6 @@ const string connectionString =
 var rep = new SqliteDbRepository(connectionString);
 
 try
-
-
 {
     var arguments = ArgumentsParser.GetArguments(args);
     Console.WriteLine(rep.Translate(arguments.Word!, arguments.Option!));
