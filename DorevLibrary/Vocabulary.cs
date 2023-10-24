@@ -46,11 +46,11 @@ public class Vocabulary
 
             command.Parameters.AddWithValue("@word", preparedOrigin);
 
-            return ReadResults(command);
+            return ReadResultsFromDb(command);
         }
     }
 
-    private string ReadResults(SqliteCommand command)
+    private string ReadResultsFromDb(SqliteCommand command)
     {
         var result = new StringBuilder();
         using (SqliteDataReader reader = command.ExecuteReader())
