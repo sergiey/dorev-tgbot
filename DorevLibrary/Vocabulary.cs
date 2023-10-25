@@ -67,7 +67,7 @@ public class Vocabulary
         return result.ToString();
     }
 
-    private string GetRegexpPreparedString(string origin, Options option)
+    private static string GetRegexpPreparedString(string origin, Options option)
     {
         return option switch {
             Options.MatchBegin =>
