@@ -20,7 +20,7 @@ public class Vocabulary
         _connectionString = connectionString;
     }
 
-    public string Translate(string origin, Options option = Options.MatchBegin)
+    public string? Translate(string origin, Options option = Options.MatchBegin)
     {
         const string sqlExpression = @"
             SELECT Modern m, Trad t
