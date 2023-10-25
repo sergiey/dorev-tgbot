@@ -79,4 +79,22 @@ public class Vocabulary
             _ => RegexpPreparer.GetBeginStringMatchRegexp(origin)
         };
     }
+
+    public string GetPresumableSpelling(string origin)
+    {
+        if(origin == null)
+            throw new ArgumentNullException();
+
+        var regexp = new Regex(@"и(?=[аеёийоуѣыэюяѵ])");
+        var result = regexp.Replace(origin.ToLower(), "і");
+
+        regexp = new Regex(@"(с)(?<=\b(бес|черес|чрес))");
+        result = regexp.Replace(result, "з");
+
+        regexp = new Regex(@"(?<=\b(ра|во|ро|и))с(?=с)");
+        result = regexp.Replace(result, "з");
+
+        regexp = new Regex(@"([цкнгшбзхщфвпрлджчсмтѳ]\b)");
+        return regexp.Replace(result, "$1ъ");
+    }
 }
