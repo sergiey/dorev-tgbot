@@ -62,7 +62,7 @@ public class Vocabulary
                     count++;
                 }
             }
-            else return "Nothing found";
+            else return null;
         }
         return result.ToString();
     }
