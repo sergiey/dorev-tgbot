@@ -50,7 +50,7 @@ public class Vocabulary
         }
     }
 
-    private string ReadResultsFromDb(SqliteCommand command)
+    private static string? ReadResultsFromDb(SqliteCommand command)
     {
         var result = new StringBuilder();
         using (SqliteDataReader reader = command.ExecuteReader())
