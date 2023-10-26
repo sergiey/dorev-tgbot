@@ -26,11 +26,12 @@ public class Vocabulary
             SELECT Modern m, Trad t
             FROM Dictionary
             WHERE m REGEXP @word";
-        
+
         if (origin == null)
             throw new ArgumentNullException();
 
-        var preparedOrigin = GetRegexpPreparedString(origin, option);
+        var normalizedWord = Normalizer.GetNormalizedWord(origin);
+        var regexpString = GetRegexpPreparedString(normalizedWord, option);
 
         using (var connection = new SqliteConnection(_connectionString))
         {
@@ -44,8 +45,7 @@ public class Vocabulary
             SqliteCommand command = new SqliteCommand(
                 sqlExpression, connection);
 
-            command.Parameters.AddWithValue("@word", preparedOrigin);
-
+            command.Parameters.AddWithValue("@word", regexpString);
             return ReadResultsFromDb(command);
         }
     }
@@ -69,14 +69,16 @@ public class Vocabulary
 
     private static string GetRegexpPreparedString(string origin, Options option)
     {
+        var normalizedWord = Normalizer.GetNormalizedWord(origin);
+        
         return option switch {
             Options.MatchBegin =>
-                RegexpPreparer.GetBeginStringMatchRegexp(origin),
+                RegexpPreparer.GetBeginStringMatchRegexp(normalizedWord),
             Options.MatchEnd =>
-                RegexpPreparer.GetEndStringMatchRegexp(origin),
+                RegexpPreparer.GetEndStringMatchRegexp(normalizedWord),
             Options.MatchAnywhere =>
-                RegexpPreparer.GetAnywhereMatchRegexp(origin),
-            _ => RegexpPreparer.GetBeginStringMatchRegexp(origin)
+                RegexpPreparer.GetAnywhereMatchRegexp(normalizedWord),
+            _ => RegexpPreparer.GetBeginStringMatchRegexp(normalizedWord)
         };
     }
 
