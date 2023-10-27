@@ -22,6 +22,7 @@ public class Vocabulary
 
     public string? Translate(string origin, Options option = Options.MatchBegin)
     {
+        const int minShrinkWordLength = 7;
         const string sqlExpression = @"
             SELECT Modern m, Trad t
             FROM Dictionary
@@ -46,7 +47,21 @@ public class Vocabulary
                 sqlExpression, connection);
 
             command.Parameters.AddWithValue("@word", regexpString);
-            return ReadResultsFromDb(command);
+            var result = ReadResultsFromDb(command);
+
+            // If the word is not found, then shrink them & repeat the search
+            if(result == null && normalizedWord.Length >= minShrinkWordLength)
+            {
+                normalizedWord = RequestPreparer.ShrinkWord(normalizedWord);
+                regexpString = GetRegexpPreparedString(normalizedWord, option);
+                
+                command = new SqliteCommand(sqlExpression, connection);
+                command.Parameters.AddWithValue("@word", regexpString);
+                
+                return ReadResultsFromDb(command);
+            }
+
+            return result;
         }
     }
 
