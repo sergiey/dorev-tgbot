@@ -30,7 +30,7 @@ public class Vocabulary
         if (origin == null)
             throw new ArgumentNullException();
 
-        var normalizedWord = Normalizer.GetNormalizedWord(origin);
+        var normalizedWord = RequestPreparer.GetNormalizedWord(origin);
         var regexpString = GetRegexpPreparedString(normalizedWord, option);
 
         using (var connection = new SqliteConnection(_connectionString))
