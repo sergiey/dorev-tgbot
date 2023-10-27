@@ -69,16 +69,16 @@ public class Vocabulary
 
     private static string GetRegexpPreparedString(string origin, Options option)
     {
-        var normalizedWord = Normalizer.GetNormalizedWord(origin);
-        
+        var normalizedWord = RequestPreparer.GetNormalizedWord(origin);
+
         return option switch {
             Options.MatchBegin =>
-                RegexpPreparer.GetBeginStringMatchRegexp(normalizedWord),
+                RequestPreparer.GetBeginStringMatchRegexp(normalizedWord),
             Options.MatchEnd =>
-                RegexpPreparer.GetEndStringMatchRegexp(normalizedWord),
+                RequestPreparer.GetEndStringMatchRegexp(normalizedWord),
             Options.MatchAnywhere =>
-                RegexpPreparer.GetAnywhereMatchRegexp(normalizedWord),
-            _ => RegexpPreparer.GetBeginStringMatchRegexp(normalizedWord)
+                RequestPreparer.GetAnywhereMatchRegexp(normalizedWord),
+            _ => RequestPreparer.GetBeginStringMatchRegexp(normalizedWord)
         };
     }
 
