@@ -31,7 +31,7 @@ public class RequestPreparer
     {
         return NeutralizeIo(origin).ToString();
     }
-    
+
     public static string GetNormalizedWord(string origin)
     {
         var str = origin.ToLower();
@@ -42,8 +42,10 @@ public class RequestPreparer
         return regexp.Replace(str, string.Empty);
     }
 
-    public static string ShrinkWord()
+    public static string ShrinkWord(string word)
     {
-        throw new NotImplementedException();
+        var shrinkTo = word.Length * 2 / 3;
+        
+        return word[..shrinkTo];
     }
 }
