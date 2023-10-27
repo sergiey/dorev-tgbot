@@ -62,7 +62,7 @@ public class Bot
 
         await botClient.SendTextMessageAsync(
             chatId: chatId,
-            text: _vocab.Translate(messageText),
+            text: FindWordInVocabulary(messageText),
             cancellationToken: cancellationToken);
     }
 
@@ -79,5 +79,23 @@ public class Bot
 
         Console.WriteLine(errorMessage);
         return Task.CompletedTask;
+    }
+
+    private string FindWordInVocabulary(string messageText)
+    {
+        var result = _vocab.Translate(messageText);
+
+        if(result != null)
+            return result;
+
+        result = _vocab.GetPresumableSpelling(messageText);
+
+        if (result == messageText)
+            return "Слово не найдено. Скорѣе всего, такъ и пишется";
+
+        if(result != null)
+            return "Слово не найдено. Предположеніе: " + result;
+
+        return "Слово не найдено";
     }
 }
