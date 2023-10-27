@@ -2,7 +2,7 @@ using System.Text;
 
 namespace DorevLibrary;
 
-public class RegexpPreparer
+public class RequestPreparer
 {
     private static StringBuilder NeutralizeIo(string origin)
     {
