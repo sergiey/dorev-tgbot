@@ -10,8 +10,10 @@ Options:
     -a    search anywhere in a word
 """;
 
-const string connectionString = 
-    "Data Source=/Users/sergeymelnikov/dorev/dorev.db";
+var dbPath = Path.GetDirectoryName(
+                 System.Reflection.Assembly.GetExecutingAssembly().Location) +
+             "/dorev.db";
+var connectionString = $"Data Source={dbPath}";
 var vocab = new Vocabulary(connectionString);
 
 try
