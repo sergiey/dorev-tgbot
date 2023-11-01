@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevConsoleApp", "DorevCon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevLibrary", "DorevLibrary\DorevLibrary.csproj", "{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevTests", "DorevTests\DorevTests.csproj", "{93570F99-2B5E-4040-9473-375226997B09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93570F99-2B5E-4040-9473-375226997B09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93570F99-2B5E-4040-9473-375226997B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93570F99-2B5E-4040-9473-375226997B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93570F99-2B5E-4040-9473-375226997B09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
