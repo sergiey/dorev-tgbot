@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevLibrary", "DorevLibrar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevTests", "DorevTests\DorevTests.csproj", "{93570F99-2B5E-4040-9473-375226997B09}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F31204E-B509-4E32-B64A-D358CBC89A5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,8 @@ Global
 		{93570F99-2B5E-4040-9473-375226997B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93570F99-2B5E-4040-9473-375226997B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93570F99-2B5E-4040-9473-375226997B09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{93570F99-2B5E-4040-9473-375226997B09} = {0F31204E-B509-4E32-B64A-D358CBC89A5A}
 	EndGlobalSection
 EndGlobal
