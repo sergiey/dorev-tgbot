@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevConsoleApp", "DorevCon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevLibrary", "DorevLibrary\DorevLibrary.csproj", "{3E1DE622-4EF7-42C5-A1E7-14D32E6C3D4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevTests", "DorevTests\DorevTests.csproj", "{93570F99-2B5E-4040-9473-375226997B09}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DorevLibrary.Tests", "DorevLibrary.Tests\DorevLibrary.Tests.csproj", "{93570F99-2B5E-4040-9473-375226997B09}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F31204E-B509-4E32-B64A-D358CBC89A5A}"
 EndProject
