@@ -38,6 +38,8 @@ public class RequestPreparer
         str = str.Replace('ѣ', 'е');
         str = str.Replace('і', 'и');
         str = str.Replace('i', 'и');
+        str = str.Replace('ѵ', 'и');
+        str = str.Replace('ѳ', 'ф');
         var regexp = new Regex(@"ъ\b");
         return regexp.Replace(str, string.Empty);
     }
@@ -45,7 +47,7 @@ public class RequestPreparer
     public static string ShrinkWord(string word)
     {
         var shrinkTo = word.Length * 2 / 3;
-        
+
         return word[..shrinkTo];
     }
 }
