@@ -41,8 +41,7 @@ public class Bot
         Console.WriteLine($"Start listening for @{me.Username}");
     }
 
-    async Task HandleUpdateAsync(
-        ITelegramBotClient botClient, Update update,
+    async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
         CancellationToken cancellationToken)
     {
         if(update.Message is not { } message)
@@ -66,14 +65,13 @@ public class Bot
             cancellationToken: cancellationToken);
     }
 
-    Task HandlePollingErrorAsync(
-        ITelegramBotClient botClient,
+    private Task HandlePollingErrorAsync(ITelegramBotClient botClient,
         Exception exception, CancellationToken cancellationToken)
     {
         var errorMessage = exception switch {
-            ApiRequestException apiRequestException
-                => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n" +
-                    $"{apiRequestException.Message}",
+            ApiRequestException apiRequestException =>
+                $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n" +
+                $"{apiRequestException.Message}",
             _ => exception.ToString()
         };
 
