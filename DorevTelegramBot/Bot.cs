@@ -65,6 +65,38 @@ public class Bot
             cancellationToken: cancellationToken);
     }
 
+    private async Task ExecuteEndCase(ITelegramBotClient botClient,
+        Message message, long chatId)
+    {
+        await botClient.SendTextMessageAsync(message.Chat,
+            "Включёнъ поискъ въ концѣ слова");
+        _option[chatId] = Options.MatchEnd;
+    }
+
+    private async Task ExecuteAnywhereCase(ITelegramBotClient botClient,
+        Message message, long chatId)
+    {
+        await botClient.SendTextMessageAsync(message.Chat,
+            "Включёнъ поискъ въ любомъ мѣстѣ слова");
+        _option[chatId] = Options.MatchAnywhere;
+    }
+
+    private async Task ExecuteBeginCase(ITelegramBotClient botClient,
+        Message message, long chatId)
+    {
+        await botClient.SendTextMessageAsync(message.Chat,
+            "Включёнъ поискъ въ началѣ слова");
+        _option[chatId] = Options.MatchBegin;
+    }
+
+    private async Task ExecuteStartCase(ITelegramBotClient botClient,
+        Message message, long chatId)
+    {
+        await botClient.SendTextMessageAsync(message.Chat,
+            "Отправьте искомое слово");
+        _option[chatId] = Options.MatchBegin;
+    }
+
     private Task HandlePollingErrorAsync(ITelegramBotClient botClient,
         Exception exception, CancellationToken cancellationToken)
     {
