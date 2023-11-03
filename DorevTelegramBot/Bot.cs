@@ -77,7 +77,7 @@ public class Bot
 
         await botClient.SendTextMessageAsync(
             chatId: chatId,
-            text: FindWordInVocabulary(messageText),
+            text: FindWordInVocabulary(messageText, chatId),
             cancellationToken: cancellationToken);
     }
 
@@ -127,9 +127,11 @@ public class Bot
         return Task.CompletedTask;
     }
 
-    private string FindWordInVocabulary(string messageText)
+    private string FindWordInVocabulary(string messageText, long chatId)
     {
-        var result = _vocab.Translate(messageText);
+        _option.TryAdd(chatId, Options.MatchBegin);
+
+        var result = _vocab.Translate(messageText, _option[chatId]);
 
         if(result != null)
             return result;
