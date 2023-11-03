@@ -12,6 +12,7 @@ public class Bot
     public string Token;
     private readonly Vocabulary _vocab;
     private readonly CancellationToken _cancelToken;
+    private readonly Dictionary<long, Options> _option = new ();
 
     public Bot(string connectionString, string token,
         CancellationToken cancelToken)
