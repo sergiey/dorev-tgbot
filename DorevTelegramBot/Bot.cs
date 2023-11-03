@@ -48,14 +48,29 @@ public class Bot
             return;
         if(message.Text is not { } messageText)
             return;
-        if(message.Text.ToLower() == "/start"){
-            await botClient.SendTextMessageAsync(
-                message.Chat,
-                "Отправьте искомое слово");
-            return;
-        }
 
         var chatId = message.Chat.Id;
+
+        switch (message.Text.ToLower())
+        {
+            case "/start": {
+                await ExecuteStartCase(botClient, message, chatId);
+                return;
+            }
+            case "/begin": {
+                await ExecuteBeginCase(botClient, message, chatId);
+                return;
+            }
+            case "/anywhere": {
+                await ExecuteAnywhereCase(botClient, message, chatId);
+                return;
+            }
+            case "/end": {
+                await ExecuteEndCase(botClient, message, chatId);
+                return;
+            }
+        }
+
         Console.WriteLine(
             $"Received a '{messageText}' message in chat {chatId}.");
 
