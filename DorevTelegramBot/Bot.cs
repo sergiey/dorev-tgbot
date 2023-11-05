@@ -1,4 +1,6 @@
+using System.Globalization;
 using DorevLibrary;
+using GetText;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -13,6 +15,8 @@ public class Bot
     private readonly Vocabulary _vocab;
     private readonly CancellationToken _cancelToken;
     private readonly Dictionary<long, Options> _option = new ();
+    private readonly ICatalog _catalog =
+        new Catalog("Bot", "./Locale", new CultureInfo("ru-RU"));
 
     public Bot(string connectionString, string token,
         CancellationToken cancelToken)
@@ -85,7 +89,7 @@ public class Bot
         Message message, long chatId)
     {
         await botClient.SendTextMessageAsync(message.Chat,
-            "Включёнъ поискъ въ концѣ слова");
+            _catalog.GetString("Search at the end of a word is enabled"));
         _option[chatId] = Options.MatchEnd;
     }
 
@@ -93,7 +97,7 @@ public class Bot
         Message message, long chatId)
     {
         await botClient.SendTextMessageAsync(message.Chat,
-            "Включёнъ поискъ въ любомъ мѣстѣ слова");
+            _catalog.GetString("Search anywhere in the word is enabled"));
         _option[chatId] = Options.MatchAnywhere;
     }
 
@@ -101,15 +105,16 @@ public class Bot
         Message message, long chatId)
     {
         await botClient.SendTextMessageAsync(message.Chat,
-            "Включёнъ поискъ въ началѣ слова");
+            _catalog.GetString(
+                "Search at the beginning of the word is enabled"));
         _option[chatId] = Options.MatchBegin;
     }
 
     private async Task ExecuteStartCase(ITelegramBotClient botClient,
         Message message, long chatId)
     {
-        await botClient.SendTextMessageAsync(message.Chat,
-            "Отправьте искомое слово");
+        await botClient.SendTextMessageAsync(message.Chat, 
+            _catalog.GetString("Submit a word to search"));
         _option[chatId] = Options.MatchBegin;
     }
 
@@ -139,11 +144,13 @@ public class Bot
         result = _vocab.GetPresumableSpelling(messageText);
 
         if (result == messageText)
-            return "Слово не найдено. Скорѣе всего, такъ и пишется";
+            return _catalog.GetString(
+                "Word not found. Most likely, that’s how it’s written");
 
         if(result != null)
-            return "Слово не найдено. Предположеніе: " + result;
+            return _catalog.GetString(
+                "Word not found. Supposedly spelled like this: ") + result;
 
-        return "Слово не найдено";
+        return _catalog.GetString("Word not found");
     }
 }
