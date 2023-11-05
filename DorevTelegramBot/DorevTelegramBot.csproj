@@ -17,4 +17,17 @@
     <ProjectReference Include="..\DorevLibrary\DorevLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Locale\ru-RU\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Locale\ru-RU\Bot.mo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Locale\ru-RU\Bot.po">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
