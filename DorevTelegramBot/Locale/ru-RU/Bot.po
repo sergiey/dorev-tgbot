@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2023-11-05 16:21+0300\n"
+"PO-Revision-Date: 2023-11-05 16:24+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-KeywordsList: GetString\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Bot.cs:92
+msgid "Search at the end of a word is enabled"
+msgstr "Включёнъ поискъ въ концѣ слова"
+
+#: Bot.cs:100
+msgid "Search anywhere in the word is enabled"
+msgstr "Включёнъ поискъ въ любомъ мѣстѣ слова"
+
+#: Bot.cs:109
+msgid "Search at the beginning of the word is enabled"
+msgstr "Включёнъ поискъ въ началѣ слова"
+
+#: Bot.cs:117
+msgid "Submit a word to search"
+msgstr "Отправьте искомое слово"
+
+#: Bot.cs:148
+msgid "Word not found. Most likely, that’s how it’s written"
+msgstr "Слово не найдено. Скорѣе всего, такъ и пишется"
+
+#: Bot.cs:152
+msgid "Word not found. Supposedly spelled like this: "
+msgstr "Слово не найдено. Предположеніе: "
+
+#: Bot.cs:154
+msgid "Word not found"
+msgstr "Слово не найдено"
