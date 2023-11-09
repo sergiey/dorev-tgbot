@@ -10,4 +10,10 @@
       <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.12" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Resources\dorev.db">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
