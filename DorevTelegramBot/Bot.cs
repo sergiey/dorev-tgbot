@@ -114,7 +114,7 @@ public class Bot
     private async Task ExecuteStartCase(ITelegramBotClient botClient,
         Message message, long chatId)
     {
-        await botClient.SendTextMessageAsync(message.Chat, 
+        await botClient.SendTextMessageAsync(message.Chat,
             _catalog.GetString("Submit a word to search"));
         _option[chatId] = Options.MatchBegin;
     }
