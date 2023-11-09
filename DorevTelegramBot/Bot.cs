@@ -17,6 +17,7 @@ public class Bot
     private readonly Dictionary<long, Options> _option = new ();
     private readonly ICatalog _catalog =
         new Catalog("Bot", "./Locale", new CultureInfo("ru-RU"));
+    private readonly CsvDataHelper _csv = new ();
 
     public Bot(string connectionString, string token,
         CancellationToken cancelToken)
@@ -77,8 +78,12 @@ public class Bot
             }
         }
 
-        Console.WriteLine($"{DateTime.Now} Received '{messageText}'" +
+        var dt = DateTime.Now.ToString();
+        Console.WriteLine($"{dt} Received '{messageText}'" +
                           $" from '{message.From?.Username}' ({chatId})");
+        
+        await CsvDataHelper.AppendLine(dt, message.From?.Username!, 
+            chatId.ToString(), messageText);
 
         await botClient.SendTextMessageAsync(
             chatId: chatId,
