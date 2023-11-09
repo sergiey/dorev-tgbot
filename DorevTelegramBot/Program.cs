@@ -1,7 +1,7 @@
 ﻿using DorevTelegramBot;
 using Microsoft.Extensions.Configuration;
 
-string connectionString = "Data Source=./dorev.db;Mode=ReadOnly";
+string connectionString = "Data Source=./Resources/dorev.db;Mode=ReadOnly";
 IConfiguration config =
     new ConfigurationBuilder().AddUserSecrets<Program>().Build();
 string token = config["Token"]!;
