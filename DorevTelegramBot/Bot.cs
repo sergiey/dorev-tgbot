@@ -77,8 +77,8 @@ public class Bot
             }
         }
 
-        Console.WriteLine(
-            $"Received a '{messageText}' message in chat {chatId}.");
+        Console.WriteLine($"{DateTime.Now} Received '{messageText}'" +
+                          $" from '{message.From?.Username}' ({chatId})");
 
         await botClient.SendTextMessageAsync(
             chatId: chatId,
