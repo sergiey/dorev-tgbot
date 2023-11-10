@@ -17,7 +17,6 @@ public class Bot
     private readonly Dictionary<long, Options> _option = new ();
     private readonly ICatalog _catalog =
         new Catalog("Bot", "./Locale", new CultureInfo("ru-RU"));
-    private readonly CsvDataHelper _csv = new ();
 
     public Bot(string connectionString, string token,
         CancellationToken cancelToken)
