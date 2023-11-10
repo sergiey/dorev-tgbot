@@ -96,6 +96,10 @@ public class Bot
         await botClient.SendTextMessageAsync(message.Chat,
             _catalog.GetString("Search at the end of a word is enabled"));
         _option[chatId] = Options.MatchEnd;
+
+        var dt = DateTime.Now.ToString();
+        Console.WriteLine($"{dt} User '{message.From?.Username}' " +
+            $"({chatId}) has enabled search in the end");
     }
 
     private async Task ExecuteAnywhereCase(ITelegramBotClient botClient,
@@ -104,6 +108,10 @@ public class Bot
         await botClient.SendTextMessageAsync(message.Chat,
             _catalog.GetString("Search anywhere in the word is enabled"));
         _option[chatId] = Options.MatchAnywhere;
+
+        var dt = DateTime.Now.ToString();
+        Console.WriteLine($"{dt} User '{message.From?.Username}' " +
+            $"({chatId}) has enabled search anywhere");
     }
 
     private async Task ExecuteBeginCase(ITelegramBotClient botClient,
@@ -113,6 +121,10 @@ public class Bot
             _catalog.GetString(
                 "Search at the beginning of the word is enabled"));
         _option[chatId] = Options.MatchBegin;
+
+        var dt = DateTime.Now.ToString();
+        Console.WriteLine($"{dt} User '{message.From?.Username}' " +
+            $"({chatId}) has enabled search in the beginning");
     }
 
     private async Task ExecuteStartCase(ITelegramBotClient botClient,
@@ -121,6 +133,10 @@ public class Bot
         await botClient.SendTextMessageAsync(message.Chat,
             _catalog.GetString("Submit a word to search"));
         _option[chatId] = Options.MatchBegin;
+
+        var dt = DateTime.Now.ToString();
+        Console.WriteLine($"{dt} User '{message.From?.Username}' " +
+            $"({chatId}) activated the bot");
     }
 
     private Task HandlePollingErrorAsync(ITelegramBotClient botClient,
