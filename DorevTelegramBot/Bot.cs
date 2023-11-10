@@ -14,7 +14,6 @@ public class Bot
     public string Token;
     private readonly Vocabulary _vocab;
     private readonly CancellationToken _cancelToken;
-    private readonly Dictionary<long, Options> _option = new ();
     private readonly ICatalog _catalog =
         new Catalog("Bot", "./Locale", new CultureInfo("ru-RU"));
 
@@ -80,9 +79,10 @@ public class Bot
         var dt = DateTime.Now.ToString();
         Console.WriteLine($"{dt} Received '{messageText}'" +
                           $" from '{message.From?.Username}' ({chatId})");
-        
-        await CsvDataHelper.AppendLine(dt, message.From?.Username!, 
-            chatId.ToString(), messageText);
+
+        await CsvDataHelper.AppendLine(dt, message.From?.Username!,
+            chatId.ToString(), messageText,
+            OptionsAccessor.GetOption(chatId).ToString());
 
         await botClient.SendTextMessageAsync(
             chatId: chatId,
@@ -95,7 +95,7 @@ public class Bot
     {
         await botClient.SendTextMessageAsync(message.Chat,
             _catalog.GetString("Search at the end of a word is enabled"));
-        _option[chatId] = Options.MatchEnd;
+        OptionsAccessor.SetOption(chatId, Options.MatchEnd);
 
         var dt = DateTime.Now.ToString();
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
@@ -107,7 +107,7 @@ public class Bot
     {
         await botClient.SendTextMessageAsync(message.Chat,
             _catalog.GetString("Search anywhere in the word is enabled"));
-        _option[chatId] = Options.MatchAnywhere;
+        OptionsAccessor.SetOption(chatId, Options.MatchAnywhere);
 
         var dt = DateTime.Now.ToString();
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
@@ -120,7 +120,7 @@ public class Bot
         await botClient.SendTextMessageAsync(message.Chat,
             _catalog.GetString(
                 "Search at the beginning of the word is enabled"));
-        _option[chatId] = Options.MatchBegin;
+        OptionsAccessor.SetOption(chatId, Options.MatchBegin);
 
         var dt = DateTime.Now.ToString();
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
@@ -132,7 +132,7 @@ public class Bot
     {
         await botClient.SendTextMessageAsync(message.Chat,
             _catalog.GetString("Submit a word to search"));
-        _option[chatId] = Options.MatchBegin;
+        OptionsAccessor.SetOption(chatId, Options.MatchBegin);
 
         var dt = DateTime.Now.ToString();
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
@@ -155,9 +155,8 @@ public class Bot
 
     private string FindWordInVocabulary(string messageText, long chatId)
     {
-        _option.TryAdd(chatId, Options.MatchBegin);
-
-        var result = _vocab.Translate(messageText, _option[chatId]);
+        var result = _vocab.Translate(messageText, 
+            OptionsAccessor.GetOption(chatId));
 
         if(result != null)
             return result;
