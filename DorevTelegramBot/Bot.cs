@@ -107,7 +107,7 @@ public class Bot
 
     private string FindWordInVocabulary(string messageText, long chatId)
     {
-        var result = _vocab.Translate(messageText, 
+        var result = _vocab.Translate(messageText,
             OptionsAccessor.GetOption(chatId));
 
         if(result != null)
