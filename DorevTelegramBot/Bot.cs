@@ -14,7 +14,8 @@ public class Bot
     public string Token;
     private readonly Vocabulary _vocab;
     private readonly CancellationToken _cancelToken;
-    private readonly ICatalog _catalog =
+    private readonly Cases _cases = new (Catalog);
+    private static readonly ICatalog Catalog =
         new Catalog("Bot", "./Locale", new CultureInfo("ru-RU"));
 
     public Bot(string connectionString, string token,
@@ -59,19 +60,19 @@ public class Bot
         switch (message.Text.ToLower())
         {
             case "/start": {
-                await ExecuteStartCase(botClient, message, chatId);
+                await _cases.ExecuteStartCase(botClient, message, chatId);
                 return;
             }
             case "/begin": {
-                await ExecuteBeginCase(botClient, message, chatId);
+                await _cases.ExecuteBeginCase(botClient, message, chatId);
                 return;
             }
             case "/anywhere": {
-                await ExecuteAnywhereCase(botClient, message, chatId);
+                await _cases.ExecuteAnywhereCase(botClient, message, chatId);
                 return;
             }
             case "/end": {
-                await ExecuteEndCase(botClient, message, chatId);
+                await _cases.ExecuteEndCase(botClient, message, chatId);
                 return;
             }
         }
@@ -88,55 +89,6 @@ public class Bot
             chatId: chatId,
             text: FindWordInVocabulary(messageText, chatId),
             cancellationToken: cancellationToken);
-    }
-
-    private async Task ExecuteEndCase(ITelegramBotClient botClient,
-        Message message, long chatId)
-    {
-        await botClient.SendTextMessageAsync(message.Chat,
-            _catalog.GetString("Search at the end of a word is enabled"));
-        OptionsAccessor.SetOption(chatId, Options.MatchEnd);
-
-        var dt = DateTime.Now.ToString();
-        Console.WriteLine($"{dt} User '{message.From?.Username}' " +
-            $"({chatId}) has enabled search in the end");
-    }
-
-    private async Task ExecuteAnywhereCase(ITelegramBotClient botClient,
-        Message message, long chatId)
-    {
-        await botClient.SendTextMessageAsync(message.Chat,
-            _catalog.GetString("Search anywhere in the word is enabled"));
-        OptionsAccessor.SetOption(chatId, Options.MatchAnywhere);
-
-        var dt = DateTime.Now.ToString();
-        Console.WriteLine($"{dt} User '{message.From?.Username}' " +
-            $"({chatId}) has enabled search anywhere");
-    }
-
-    private async Task ExecuteBeginCase(ITelegramBotClient botClient,
-        Message message, long chatId)
-    {
-        await botClient.SendTextMessageAsync(message.Chat,
-            _catalog.GetString(
-                "Search at the beginning of the word is enabled"));
-        OptionsAccessor.SetOption(chatId, Options.MatchBegin);
-
-        var dt = DateTime.Now.ToString();
-        Console.WriteLine($"{dt} User '{message.From?.Username}' " +
-            $"({chatId}) has enabled search in the beginning");
-    }
-
-    private async Task ExecuteStartCase(ITelegramBotClient botClient,
-        Message message, long chatId)
-    {
-        await botClient.SendTextMessageAsync(message.Chat,
-            _catalog.GetString("Submit a word to search"));
-        OptionsAccessor.SetOption(chatId, Options.MatchBegin);
-
-        var dt = DateTime.Now.ToString();
-        Console.WriteLine($"{dt} User '{message.From?.Username}' " +
-            $"({chatId}) activated the bot");
     }
 
     private Task HandlePollingErrorAsync(ITelegramBotClient botClient,
@@ -164,13 +116,13 @@ public class Bot
         result = _vocab.GetPresumableSpelling(messageText);
 
         if (result == messageText)
-            return _catalog.GetString(
+            return Catalog.GetString(
                 "Word not found. Most likely, that’s how it’s written");
 
         if(result != null)
-            return _catalog.GetString(
+            return Catalog.GetString(
                 "Word not found. Supposedly spelled like this: ") + result;
 
-        return _catalog.GetString("Word not found");
+        return Catalog.GetString("Word not found");
     }
 }
