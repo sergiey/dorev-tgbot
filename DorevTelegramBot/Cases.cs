@@ -1,3 +1,4 @@
+using System.Globalization;
 using DorevLibrary;
 using GetText;
 using Telegram.Bot;
@@ -21,7 +22,7 @@ public class Cases
             _catalog.GetString("Submit a word to search"));
         OptionsAccessor.SetOption(chatId, Options.MatchBegin);
 
-        var dt = DateTime.Now.ToString();
+        var dt = DateTime.Now.ToString(new CultureInfo("ru-RU"));
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
             $"({chatId}) activated the bot");
     }
@@ -34,7 +35,7 @@ public class Cases
                 "Search at the beginning of the word is enabled"));
         OptionsAccessor.SetOption(chatId, Options.MatchBegin);
 
-        var dt = DateTime.Now.ToString();
+        var dt = DateTime.Now.ToString(new CultureInfo("ru-RU"));
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
             $"({chatId}) has enabled search in the beginning");
     }
@@ -46,7 +47,7 @@ public class Cases
             _catalog.GetString("Search anywhere in the word is enabled"));
         OptionsAccessor.SetOption(chatId, Options.MatchAnywhere);
 
-        var dt = DateTime.Now.ToString();
+        var dt = DateTime.Now.ToString(new CultureInfo("ru-RU"));
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
             $"({chatId}) has enabled search anywhere");
     }
@@ -58,7 +59,7 @@ public class Cases
             _catalog.GetString("Search at the end of a word is enabled"));
         OptionsAccessor.SetOption(chatId, Options.MatchEnd);
 
-        var dt = DateTime.Now.ToString();
+        var dt = DateTime.Now.ToString(new CultureInfo("ru-RU"));
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
             $"({chatId}) has enabled search in the end");
     }

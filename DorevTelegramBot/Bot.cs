@@ -77,7 +77,7 @@ public class Bot
             }
         }
 
-        var dt = DateTime.Now.ToString();
+        var dt = DateTime.Now.ToString(new CultureInfo("ru-RU"));
         Console.WriteLine($"{dt} Received '{messageText}'" +
                           $" from '{message.From?.Username}' ({chatId})");
 
