@@ -39,7 +39,6 @@ public class Cases
             $"({chatId}) has enabled search in the beginning");
     }
 
-
     internal async Task ExecuteAnywhereCase(ITelegramBotClient botClient,
         Message message, long chatId)
     {
@@ -63,11 +62,4 @@ public class Cases
         Console.WriteLine($"{dt} User '{message.From?.Username}' " +
             $"({chatId}) has enabled search in the end");
     }
-
-    internal async Task ExecuteFeedbackCase(ITelegramBotClient botClient,
-        Message message, long chatId)
-    {
-        throw new NotImplementedException();
-    }
-
 }

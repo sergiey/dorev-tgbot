@@ -75,10 +75,6 @@ public class Bot
                 await _cases.ExecuteEndCase(botClient, message, chatId);
                 return;
             }
-            case "/feedback": {
-                await _cases.ExecuteFeedbackCase(botClient, message, chatId);
-                return;
-            }
         }
 
         var dt = DateTime.Now.ToString();
