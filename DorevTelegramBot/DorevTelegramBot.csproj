@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Locale\ru-RU\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
