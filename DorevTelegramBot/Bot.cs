@@ -1,5 +1,6 @@
 using System.Globalization;
 using DorevLibrary;
+using DorevTelegramBot.Models;
 using GetText;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
@@ -14,7 +15,8 @@ public class Bot
     public string Token;
     private readonly Vocabulary _vocab;
     private readonly CancellationToken _cancelToken;
-    private readonly Cases _cases = new (Catalog);
+    private readonly CommandHandler _commandHandler = new (Catalog);
+    private readonly SettingsAccessor _settings = new(); 
     private static readonly ICatalog Catalog =
         new Catalog("Bot", "./Locale", new CultureInfo("ru-RU"));
 
@@ -55,39 +57,21 @@ public class Bot
         if(message.Text is not { } messageText)
             return;
 
-        var chatId = message.Chat.Id;
+        var msg = new ReceivedMessage(message.Text, DateTime.Now, 
+            message.Chat.Id, message.From?.Username);
+        
+        var dt = msg.Datetime.ToString(new CultureInfo("ru-RU"));
+        Console.WriteLine($"{dt} Received '{msg.Text}'" +
+                          $" from '{msg.Username}' ({msg.UserId})");
 
-        switch (message.Text.ToLower())
-        {
-            case "/start": {
-                await _cases.ExecuteStartCase(botClient, message, chatId);
-                return;
-            }
-            case "/begin": {
-                await _cases.ExecuteBeginCase(botClient, message, chatId);
-                return;
-            }
-            case "/anywhere": {
-                await _cases.ExecuteAnywhereCase(botClient, message, chatId);
-                return;
-            }
-            case "/end": {
-                await _cases.ExecuteEndCase(botClient, message, chatId);
-                return;
-            }
+        if(msg.IsCommand()) {
+            await _commandHandler.Handle(msg, botClient);
+            return;
         }
-
-        var dt = DateTime.Now.ToString(new CultureInfo("ru-RU"));
-        Console.WriteLine($"{dt} Received '{messageText}'" +
-                          $" from '{message.From?.Username}' ({chatId})");
-
-        await CsvDataHelper.AppendLine(dt, message.From?.Username!,
-            chatId.ToString(), messageText,
-            OptionsAccessor.GetOption(chatId).ToString());
-
+        
         await botClient.SendTextMessageAsync(
-            chatId: chatId,
-            text: FindWordInVocabulary(messageText, chatId),
+            chatId: msg.UserId,
+            text: HandleRequest(msg).Result,
             cancellationToken: cancellationToken);
     }
 
@@ -105,17 +89,31 @@ public class Bot
         return Task.CompletedTask;
     }
 
-    private string FindWordInVocabulary(string messageText, long chatId)
+    private async Task<string> HandleRequest(ReceivedMessage message)
     {
-        var result = _vocab.Translate(messageText,
-            OptionsAccessor.GetOption(chatId));
+        var dt = message.Datetime.ToString(new CultureInfo("ru-RU"));
+        
+        if (_settings.IsFeedback(message.UserId)) {
+            await CsvDataHelper.AppendLine(dt, message.Username!, 
+                message.UserId.ToString(), message.Text, "Feedback");
+            _settings.SetFeedback(message.UserId, false);
+            
+            return Catalog.GetString("Your feedback has been received");
+        }
+        
+        await CsvDataHelper.AppendLine(dt, message.Username!, 
+            message.UserId.ToString(), message.Text, 
+            _settings.GetOption(message.UserId).ToString());
+        
+        var result = _vocab.Translate(message.Text,
+            _settings.GetOption(message.UserId));
 
         if(result != null)
             return result;
 
-        result = _vocab.GetPresumableSpelling(messageText);
+        result = _vocab.GetPresumableSpelling(message.Text);
 
-        if (result == messageText)
+        if (result == message.Text)
             return Catalog.GetString(
                 "Word not found. Most likely, that’s how it’s written");
 
