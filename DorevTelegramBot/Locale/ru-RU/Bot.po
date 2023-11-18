@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-11-05 16:21+0300\n"
-"PO-Revision-Date: 2023-11-05 16:24+0300\n"
+"POT-Creation-Date: 2023-11-18 17:42+0300\n"
+"PO-Revision-Date: 2023-11-18 17:51+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -14,30 +14,42 @@ msgstr ""
 "X-Poedit-KeywordsList: GetString\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Bot.cs:92
-msgid "Search at the end of a word is enabled"
-msgstr "Включёнъ поискъ въ концѣ слова"
+#: Bot.cs:101
+msgid "Your feedback has been received"
+msgstr "Спасибо за сообщеніе"
 
-#: Bot.cs:100
-msgid "Search anywhere in the word is enabled"
-msgstr "Включёнъ поискъ въ любомъ мѣстѣ слова"
-
-#: Bot.cs:109
-msgid "Search at the beginning of the word is enabled"
-msgstr "Включёнъ поискъ въ началѣ слова"
-
-#: Bot.cs:117
-msgid "Submit a word to search"
-msgstr "Отправьте искомое слово"
-
-#: Bot.cs:148
+#: Bot.cs:118
 msgid "Word not found. Most likely, that’s how it’s written"
 msgstr "Слово не найдено. Скорѣе всего, такъ и пишется"
 
-#: Bot.cs:152
+#: Bot.cs:122
 msgid "Word not found. Supposedly spelled like this: "
 msgstr "Слово не найдено. Предположеніе: "
 
-#: Bot.cs:154
+#: Bot.cs:124
 msgid "Word not found"
 msgstr "Слово не найдено"
+
+#: CommandHandler.cs:47
+msgid "Submit a word to search"
+msgstr "Отправьте искомое слово"
+
+#: CommandHandler.cs:53
+msgid "Search at the beginning of the word is enabled"
+msgstr "Включёнъ поискъ въ началѣ слова"
+
+#: CommandHandler.cs:58
+msgid "Search anywhere in the word is enabled"
+msgstr "Включёнъ поискъ въ любомъ мѣстѣ слова"
+
+#: CommandHandler.cs:63
+msgid "Search at the end of a word is enabled"
+msgstr "Включёнъ поискъ въ концѣ слова"
+
+#: CommandHandler.cs:68
+msgid "Unknown command"
+msgstr "Неизвѣстная команда"
+
+#: CommandHandler.cs:91
+msgid "Leave feedback or report a mistake"
+msgstr "Сообщите объ ошибкѣ или оставьте отзывъ"
