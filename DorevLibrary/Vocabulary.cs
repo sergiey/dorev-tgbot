@@ -13,12 +13,8 @@ public enum Options
 
 public class Vocabulary
 {
-    private readonly string _connectionString;
-
-    public Vocabulary(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
+    private const string ConnectionString = 
+        "Data Source=./Resources/dorev.db;Mode=ReadOnly";
 
     public string? Translate(string origin, Options option = Options.MatchBegin)
     {
@@ -34,7 +30,7 @@ public class Vocabulary
         var normalizedWord = RequestPreparer.GetNormalizedWord(origin);
         var regexpString = GetRegexpPreparedString(normalizedWord, option);
 
-        using (var connection = new SqliteConnection(_connectionString))
+        using (var connection = new SqliteConnection(ConnectionString))
         {
             connection.CreateFunction(
                 "regexp",
@@ -54,10 +50,10 @@ public class Vocabulary
             {
                 normalizedWord = RequestPreparer.ShrinkWord(normalizedWord);
                 regexpString = GetRegexpPreparedString(normalizedWord, option);
-                
+
                 command = new SqliteCommand(sqlExpression, connection);
                 command.Parameters.AddWithValue("@word", regexpString);
-                
+
                 return ReadResultsFromDb(command);
             }
 
