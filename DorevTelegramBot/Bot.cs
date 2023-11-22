@@ -13,19 +13,17 @@ namespace DorevTelegramBot;
 public class Bot
 {
     public string Token;
-    private readonly Vocabulary _vocab;
+    private readonly Vocabulary _vocab = new();
     private readonly CancellationToken _cancelToken;
     private readonly CommandHandler _commandHandler = new (Catalog);
     private readonly SettingsAccessor _settings = new(); 
     private static readonly ICatalog Catalog =
         new Catalog("Bot", "./Locale", new CultureInfo("ru-RU"));
 
-    public Bot(string connectionString, string token,
-        CancellationToken cancelToken)
+    public Bot(string token, CancellationToken cancelToken)
     {
         Token = token;
         _cancelToken = cancelToken;
-        _vocab = new Vocabulary(connectionString);
     }
 
     public async Task Run()
