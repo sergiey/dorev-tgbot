@@ -24,9 +24,9 @@ public class Vocabulary
     {
         const int minShrinkWordLength = 7;
         const string sqlExpression = @"
-            SELECT Modern m, Trad t
+            SELECT Modern, Trad
             FROM Dictionary
-            WHERE m REGEXP @word";
+            WHERE Modern REGEXP @word";
 
         if (origin == null)
             throw new ArgumentNullException();
