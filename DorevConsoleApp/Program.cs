@@ -10,11 +10,7 @@ Options:
     -a    search anywhere in a word
 """;
 
-var dbPath = Path.GetDirectoryName(
-                 System.Reflection.Assembly.GetExecutingAssembly().Location) +
-             "/dorev.db";
-var connectionString = $"Data Source={dbPath}";
-var vocab = new Vocabulary(connectionString);
+var vocab = new Vocabulary();
 
 try
 {
