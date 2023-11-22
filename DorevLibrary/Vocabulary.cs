@@ -73,7 +73,7 @@ public class Vocabulary
             int count = 0;
             if(reader.HasRows) {
                 while(reader.Read() && count < 20) {
-                    result.Append($"{reader.GetString(1)}\n");
+                    result.Append($"{reader["Trad"]}\n");
                     count++;
                 }
             }
