@@ -20,9 +20,9 @@ try
 }
 catch (Exception e)
 {
-    Console.Error.WriteLine($"Exception: {e.Message}");
-    Console.Error.WriteLine($"Method: {e.TargetSite}");
-    Console.Error.WriteLine($"Stack trace: {e.StackTrace}");
+    Console.Error.WriteLine($"{DateTime.Now}\nException:\n{e.Message}");
+    Console.Error.WriteLine($"Method:\n{e.TargetSite}");
+    Console.Error.WriteLine($"Stack trace:\n{e.StackTrace}");
 }
 finally
 {
